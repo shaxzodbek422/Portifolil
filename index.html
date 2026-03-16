@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuriddinov Shaxzodbek | Portfolio</title>
+  <meta name="description" content="Nuriddinov Shaxzodbek - Al-Xorazmiy loyihasi o'quvchisi | Developer Portfolio" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            navy: {
+              900: '#0a0e1a',
+              800: '#0f1629',
+              700: '#151d38',
+              600: '#1c2647',
+            },
+            cyan: {
+              400: '#22d3ee',
+              500: '#06b6d4',
+            },
+            coral: {
+              400: '#fb923c',
+              500: '#f97316',
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #0a0e1a;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Glassmorphism */
+    .glass {
+      background: rgba(15, 22, 41, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(34, 211, 238, 0.1);
+    }
+    .glass-hover:hover {
+      background: rgba(15, 22, 41, 0.8);
+      border-color: rgba(34, 211, 238, 0.3);
+      transform: translateY(-4px);
+    }
+
+    /* Glow effects */
+    .glow-cyan { box-shadow: 0 0 20px rgba(34, 211, 238, 0.15), 0 0 60px rgba(34, 211, 238, 0.05); }
+    .glow-text-cyan { text-shadow: 0 0 20px rgba(34, 211, 238, 0.4); }
+    .glow-text-coral { text-shadow: 0 0 20px rgba(249, 115, 22, 0.4); }
+
+    /* Floating animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .animate-float-delayed { animation: float 6s ease-in-out 2s infinite; }
+    .animate-float-slow { animation: float 8s ease-in-out 1s infinite; }
+
+    /* Fade in up */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in { animation: fadeInUp 0.7s ease-out forwards; opacity: 0; }
+
+    /* Slide in */
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .animate-slide-left { animation: slideInLeft 0.6s ease-out forwards; opacity: 0; }
+
+    /* Pulse ring */
+    @keyframes pulseRing {
+      0% { transform: scale(0.8); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 0; }
+      100% { transform: scale(0.8); opacity: 0.5; }
+    }
+    .pulse-ring { animation: pulseRing 3s ease-in-out infinite; }
+
+    /* Grid pattern background */
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Gradient line */
+    .gradient-line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #22d3ee, #f97316, transparent);
+    }
+
+    /* Skill bar animation */
+    .skill-fill {
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0e1a; }
+    ::-webkit-scrollbar-thumb { background: #1c2647; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #22d3ee; }
+
+    /* Nav active */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #22d3ee;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Tag style */
+    .tech-tag {
+      background: rgba(34, 211, 238, 0.1);
+      border: 1px solid rgba(34, 211, 238, 0.2);
+      color: #22d3ee;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.3s ease;
+    }
+    .tech-tag:hover {
+      background: rgba(34, 211, 238, 0.2);
+      border-color: rgba(34, 211, 238, 0.4);
+    }
+  </style>
+</head>
+<body class="grid-bg">
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="fixed top-0 w-full z-50 glass" id="navbar">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-2 group">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-coral-400 flex items-center justify-center text-navy-900 font-bold text-sm group-hover:scale-110 transition-transform">
+          SH
+        </div>
+        <span class="text-white font-semibold tracking-tight hidden sm:inline">shaxzodbek.dev</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#about" class="nav-link text-sm text-slate-400 hover:text-cyan-400 transition-colors">Men haqimda</a>
+        <a href="#skills" class="nav-link text-sm text-slate-400 hover:text-cyan-400 transition-colors">Ko'nikmalar</a>
+        <a href="#projects" class="nav-link text-sm text-slate-400 hover:text-cyan-400 transition-colors">Loyihalar</a>
+        <a href="#contact" class="nav-link text-sm text-slate-400 hover:text-cyan-400 transition-colors">Aloqa</a>
+      </div>
+      <button id="menuBtn" class="md:hidden text-slate-400 hover:text-cyan-400 transition-colors" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-6 pb-4 space-y-3">
+      <a href="#about" class="block text-sm text-slate-400 hover:text-cyan-400 transition-colors">Men haqimda</a>
+      <a href="#skills" class="block text-sm text-slate-400 hover:text-cyan-400 transition-colors">Ko'nikmalar</a>
+      <a href="#projects" class="block text-sm text-slate-400 hover:text-cyan-400 transition-colors">Loyihalar</a>
+      <a href="#contact" class="block text-sm text-slate-400 hover:text-cyan-400 transition-colors">Aloqa</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
+    <!-- Decorative orbs -->
+    <div class="absolute top-20 left-10 w-72 h-72 bg-cyan-400/5 rounded-full blur-3xl animate-float"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-coral-400/5 rounded-full blur-3xl animate-float-delayed"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-cyan-400/5 pulse-ring"></div>
+
+    <div class="relative z-10 text-center max-w-3xl mx-auto">
+      <div class="inline-block mb-6">
+        <span class="font-mono text-xs text-cyan-400 tracking-widest uppercase px-4 py-2 border border-cyan-400/20 rounded-full bg-cyan-400/5">Al-Xorazmiy loyihasi</span>
+      </div>
+      <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4">
+        Nuriddinov<br />
+        <span class="bg-gradient-to-r from-cyan-400 to-coral-400 bg-clip-text text-transparent">Shaxzodbek</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-slate-400 mb-8 max-w-xl mx-auto leading-relaxed">
+        Dasturlash bilan kelajak quraman. Zamonaviy texnologiyalarni o'rganish va yaratish mening ishtiyoqim.
+      </p>
+      <div class="flex items-center justify-center gap-4 flex-wrap">
+        <a href="#projects" class="px-6 py-3 bg-gradient-to-r from-cyan-400 to-cyan-500 text-navy-900 font-semibold rounded-lg hover:opacity-90 transition-opacity text-sm">
+          Loyihalarimni ko'ring
+        </a>
+        <a href="#contact" class="px-6 py-3 border border-slate-600 text-slate-300 rounded-lg hover:border-cyan-400 hover:text-cyan-400 transition-all text-sm">
+          Bog'lanish
+        </a>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500">
+        <span class="text-xs font-mono">scroll</span>
+        <div class="w-5 h-8 rounded-full border border-slate-600 flex items-start justify-center p-1">
+          <div class="w-1 h-2 bg-cyan-400 rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="gradient-line mb-16 max-w-xs"></div>
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <!-- Left -->
+        <div class="reveal-section">
+          <span class="font-mono text-xs text-coral-400 tracking-widest uppercase mb-3 block">01 / Men haqimda</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight">Dasturlashga bo'lgan<br /><span class="text-cyan-400">ishtiyoq</span></h2>
+          <p class="text-slate-400 leading-relaxed mb-4">
+            Men Nuriddinov Shaxzodbek -- Al-Xorazmiy loyihasining faol o'quvchisiman. Dasturlash dunyosiga qiziqishim katta va har kuni yangi narsalarni o'rganishga intilib boraman.
+          </p>
+          <p class="text-slate-400 leading-relaxed mb-4">
+            Web dasturlash, Python, va zamonaviy texnologiyalar bilan ishlayman. Maqsadim -- kuchli dasturchi bo'lib, foydali loyihalar yaratish.
+          </p>
+          <p class="text-slate-400 leading-relaxed">
+            O'z ustimda tinimsiz ishlab, tajribamni oshirib boraman. Har bir loyiha menga yangi bilim va tajriba beradi.
+          </p>
+        </div>
+        <!-- Right -- Info Card -->
+        <div class="glass rounded-2xl p-8 glow-cyan reveal-section">
+          <h3 class="text-white font-semibold mb-6 text-lg">Tezkor ma'lumotlar</h3>
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-cyan-400/10 flex items-center justify-center shrink-0">
+                <svg width="18" height="18" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <div>
+                <p class="text-white text-sm font-medium">Loyiha</p>
+                <p class="text-slate-400 text-sm">Al-Xorazmiy IT loyihasi</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-coral-400/10 flex items-center justify-center shrink-0">
+                <svg width="18" height="18" fill="none" stroke="#fb923c" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 3"/></svg>
+              </div>
+              <div>
+                <p class="text-white text-sm font-medium">Tajriba</p>
+                <p class="text-slate-400 text-sm">Dasturlashni o'rganmoqda</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-cyan-400/10 flex items-center justify-center shrink-0">
+                <svg width="18" height="18" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <p class="text-white text-sm font-medium">Manzil</p>
+                <p class="text-slate-400 text-sm">O'zbekiston</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-lg bg-coral-400/10 flex items-center justify-center shrink-0">
+                <svg width="18" height="18" fill="none" stroke="#fb923c" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+              </div>
+              <div>
+                <p class="text-white text-sm font-medium">Qiziqishlar</p>
+                <p class="text-slate-400 text-sm">Web, Python, AI, Algoritmlar</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="gradient-line mb-16 max-w-xs"></div>
+      <span class="font-mono text-xs text-coral-400 tracking-widest uppercase mb-3 block reveal-section">02 / Ko'nikmalar</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 reveal-section">Texnik <span class="text-cyan-400">bilimlarim</span></h2>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Skill bars -->
+        <div class="space-y-6 reveal-section">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm text-white font-medium">HTML / CSS</span>
+              <span class="text-xs font-mono text-cyan-400">90%</span>
+            </div>
+            <div class="h-2 rounded-full bg-navy-700 overflow-hidden">
+              <div class="skill-fill h-full rounded-full bg-gradient-to-r from-cyan-400 to-cyan-500" data-width="90"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm text-white font-medium">JavaScript</span>
+              <span class="text-xs font-mono text-cyan-400">75%</span>
+            </div>
+            <div class="h-2 rounded-full bg-navy-700 overflow-hidden">
+              <div class="skill-fill h-full rounded-full bg-gradient-to-r from-cyan-400 to-coral-400" data-width="75"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm text-white font-medium">Python</span>
+              <span class="text-xs font-mono text-cyan-400">80%</span>
+            </div>
+            <div class="h-2 rounded-full bg-navy-700 overflow-hidden">
+              <div class="skill-fill h-full rounded-full bg-gradient-to-r from-coral-400 to-coral-500" data-width="80"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm text-white font-medium">React</span>
+              <span class="text-xs font-mono text-cyan-400">60%</span>
+            </div>
+            <div class="h-2 rounded-full bg-navy-700 overflow-hidden">
+              <div class="skill-fill h-full rounded-full bg-gradient-to-r from-cyan-400 to-cyan-500" data-width="60"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm text-white font-medium">Tailwind CSS</span>
+              <span class="text-xs font-mono text-cyan-400">85%</span>
+            </div>
+            <div class="h-2 rounded-full bg-navy-700 overflow-hidden">
+              <div class="skill-fill h-full rounded-full bg-gradient-to-r from-cyan-400 to-coral-400" data-width="85"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm text-white font-medium">Git / GitHub</span>
+              <span class="text-xs font-mono text-cyan-400">70%</span>
+            </div>
+            <div class="h-2 rounded-full bg-navy-700 overflow-hidden">
+              <div class="skill-fill h-full rounded-full bg-gradient-to-r from-coral-400 to-coral-500" data-width="70"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill cards grid -->
+        <div class="grid grid-cols-2 gap-4 reveal-section">
+          <div class="glass rounded-xl p-5 glass-hover transition-all duration-300 cursor-default">
+            <div class="text-3xl mb-3 text-cyan-400 font-bold">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M4 6l2.5 20L16 30l9.5-4L28 6H4z" fill="#E44D26"/><path d="M16 28l7.7-3.2L26 8H16v20z" fill="#F16529"/><path d="M16 14h-4.6l-.3-3.2H16V8H8.6l.8 9H16v-3zm0 6.2l-4.4-1.2-.3-3H8.7l.5 6L16 24v-3.8z" fill="#EBEBEB"/><path d="M16 14v3h4.3l-.4 4.2L16 22.4V26l7.1-2 .1-.8.8-9.2.1-1H16zm0-6v2.8h7l.1-1 .2-1.8H16z" fill="#fff"/></svg>
+            </div>
+            <h4 class="text-white font-semibold text-sm mb-1">HTML5</h4>
+            <p class="text-slate-500 text-xs">Semantik va zamonaviy</p>
+          </div>
+          <div class="glass rounded-xl p-5 glass-hover transition-all duration-300 cursor-default">
+            <div class="text-3xl mb-3 text-cyan-400 font-bold">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M4 6l2.5 20L16 30l9.5-4L28 6H4z" fill="#1572B6"/><path d="M16 28l7.7-3.2L26 8H16v20z" fill="#33A9DC"/><path d="M16 14h-4.6l-.3-3.2H16V8H8.6l.8 9H16v-3zm0 6.2l-4.4-1.2-.3-3H8.7l.5 6L16 24v-3.8z" fill="#EBEBEB"/><path d="M16 14v3h4.3l-.4 4.2L16 22.4V26l7.1-2 .1-.8.8-9.2.1-1H16zm0-6v2.8h7l.1-1 .2-1.8H16z" fill="#fff"/></svg>
+            </div>
+            <h4 class="text-white font-semibold text-sm mb-1">CSS3</h4>
+            <p class="text-slate-500 text-xs">Animatsiya va dizayn</p>
+          </div>
+          <div class="glass rounded-xl p-5 glass-hover transition-all duration-300 cursor-default">
+            <div class="text-3xl mb-3">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="4" fill="#F7DF1E"/><path d="M20.5 24.5c.6 1 1.5 1.7 2.9 1.7 1.2 0 2-.6 2-1.4 0-1-.8-1.4-2.1-2l-.7-.3c-2.1-.9-3.5-2-3.5-4.4 0-2.2 1.7-3.8 4.3-3.8 1.8 0 3.2.6 4.1 2.3l-2.2 1.5c-.5-.9-1-1.2-1.9-1.2-.8 0-1.4.5-1.4 1.2 0 .8.5 1.2 1.7 1.7l.7.3c2.5 1.1 3.9 2.1 3.9 4.5 0 2.6-2 4-4.7 4-2.6 0-4.3-1.3-5.1-2.9l2.4-1.2zM8.5 24.8c.5.8.9 1.5 1.9 1.5 1 0 1.6-.4 1.6-1.9V15h2.9v9.5c0 3.2-1.9 4.6-4.6 4.6-2.5 0-3.9-1.3-4.6-2.8l2.8-1.5z" fill="#000"/></svg>
+            </div>
+            <h4 class="text-white font-semibold text-sm mb-1">JavaScript</h4>
+            <p class="text-slate-500 text-xs">Interaktiv dasturlash</p>
+          </div>
+          <div class="glass rounded-xl p-5 glass-hover transition-all duration-300 cursor-default">
+            <div class="text-3xl mb-3">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 3C8.8 3 3 5.7 3 9v14c0 3.3 5.8 6 13 6s13-2.7 13-6V9c0-3.3-5.8-6-13-6z" fill="#306998"/><path d="M16 3c7.2 0 13 2.7 13 6v14c0 3.3-5.8 6-13 6" fill="#FFD43B"/><circle cx="13" cy="9" r="1.5" fill="#FFD43B"/><circle cx="19" cy="23" r="1.5" fill="#306998"/></svg>
+            </div>
+            <h4 class="text-white font-semibold text-sm mb-1">Python</h4>
+            <p class="text-slate-500 text-xs">Backend va AI</p>
+          </div>
+          <div class="glass rounded-xl p-5 glass-hover transition-all duration-300 cursor-default">
+            <div class="text-3xl mb-3 text-cyan-400 font-bold">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="3" fill="#61DAFB"/><ellipse cx="16" cy="16" rx="12" ry="4.5" stroke="#61DAFB" stroke-width="1.5" fill="none"/><ellipse cx="16" cy="16" rx="12" ry="4.5" stroke="#61DAFB" stroke-width="1.5" fill="none" transform="rotate(60 16 16)"/><ellipse cx="16" cy="16" rx="12" ry="4.5" stroke="#61DAFB" stroke-width="1.5" fill="none" transform="rotate(120 16 16)"/></svg>
+            </div>
+            <h4 class="text-white font-semibold text-sm mb-1">React</h4>
+            <p class="text-slate-500 text-xs">UI komponentlar</p>
+          </div>
+          <div class="glass rounded-xl p-5 glass-hover transition-all duration-300 cursor-default">
+            <div class="text-3xl mb-3">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4L3 10l13 6 13-6L16 4z" fill="#38BDF8"/><path d="M8 18c0 0 2 4 8 4s8-4 8-4" stroke="#38BDF8" stroke-width="2" fill="none"/></svg>
+            </div>
+            <h4 class="text-white font-semibold text-sm mb-1">Tailwind CSS</h4>
+            <p class="text-slate-500 text-xs">Tez va chiroyli UI</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="gradient-line mb-16 max-w-xs"></div>
+      <span class="font-mono text-xs text-coral-400 tracking-widest uppercase mb-3 block reveal-section">03 / Loyihalar</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-12 reveal-section">Tanlangan <span class="text-cyan-400">ishlarim</span></h2>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Project 1 -->
+        <div class="glass rounded-2xl overflow-hidden glass-hover transition-all duration-300 group reveal-section">
+          <div class="h-44 bg-gradient-to-br from-cyan-400/20 to-navy-700 flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(34,211,238,0.15),transparent)]"></div>
+            <svg width="48" height="48" fill="none" stroke="#22d3ee" stroke-width="1.5" class="relative z-10 group-hover:scale-110 transition-transform"><rect x="6" y="10" width="36" height="24" rx="3"/><path d="M14 20l4 4-4 4M22 28h8"/></svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-white font-semibold text-lg mb-2">Portfolio Website</h3>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">Shaxsiy portfolio sayti -- zamonaviy dizayn, responsive layout va animatsiyalar bilan.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="glass rounded-2xl overflow-hidden glass-hover transition-all duration-300 group reveal-section">
+          <div class="h-44 bg-gradient-to-br from-coral-400/20 to-navy-700 flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(249,115,22,0.15),transparent)]"></div>
+            <svg width="48" height="48" fill="none" stroke="#fb923c" stroke-width="1.5" class="relative z-10 group-hover:scale-110 transition-transform"><circle cx="24" cy="24" r="18"/><path d="M16 22a4 4 0 018 0c0 4-4 4-4 8M24 34h0"/></svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-white font-semibold text-lg mb-2">Quiz App</h3>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">Interaktiv viktorina ilovasi -- ballar tizimi, taymer va natijalar sahifasi.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">SQLite</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="glass rounded-2xl overflow-hidden glass-hover transition-all duration-300 group reveal-section">
+          <div class="h-44 bg-gradient-to-br from-cyan-400/20 to-coral-400/20 flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(34,211,238,0.1),transparent)]"></div>
+            <svg width="48" height="48" fill="none" stroke="#22d3ee" stroke-width="1.5" class="relative z-10 group-hover:scale-110 transition-transform"><path d="M12 8h24v32H12zM8 12v24h24"/><path d="M18 22h12M18 28h8"/></svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-white font-semibold text-lg mb-2">Vazifalar Boshqaruvchisi</h3>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">To-do ilovasi -- vazifalarni qo'shish, tahrirlash, o'chirish va filtrlash imkoniyati.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Tailwind</span>
+              <span class="tech-tag">LocalStorage</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="glass rounded-2xl overflow-hidden glass-hover transition-all duration-300 group reveal-section">
+          <div class="h-44 bg-gradient-to-br from-coral-400/20 to-navy-700 flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_70%,rgba(249,115,22,0.15),transparent)]"></div>
+            <svg width="48" height="48" fill="none" stroke="#fb923c" stroke-width="1.5" class="relative z-10 group-hover:scale-110 transition-transform"><path d="M12 6v36M36 6v36M6 16h36M6 32h36"/></svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-white font-semibold text-lg mb-2">Ob-havo Ilovasi</h3>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">API orqali real vaqt ob-havo ma'lumotlarini ko'rsatuvchi ilova.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">API</span>
+              <span class="tech-tag">CSS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5 -->
+        <div class="glass rounded-2xl overflow-hidden glass-hover transition-all duration-300 group reveal-section">
+          <div class="h-44 bg-gradient-to-br from-cyan-400/20 to-navy-700 flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(34,211,238,0.15),transparent)]"></div>
+            <svg width="48" height="48" fill="none" stroke="#22d3ee" stroke-width="1.5" class="relative z-10 group-hover:scale-110 transition-transform"><path d="M24 6L6 14l18 8 18-8-18-8zM6 24l18 8 18-8M6 34l18 8 18-8"/></svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-white font-semibold text-lg mb-2">Kalkulyator</h3>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">Ilmiy kalkulyator -- matematik funksiyalar, tarix va chiroyli interfeys.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6 -->
+        <div class="glass rounded-2xl overflow-hidden glass-hover transition-all duration-300 group reveal-section">
+          <div class="h-44 bg-gradient-to-br from-coral-400/10 to-cyan-400/10 flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(249,115,22,0.1),transparent)]"></div>
+            <svg width="48" height="48" fill="none" stroke="#fb923c" stroke-width="1.5" class="relative z-10 group-hover:scale-110 transition-transform"><path d="M14 8C9 8 6 12 6 18s8 18 18 24c10-6 18-12 18-18s-3-10-8-10c-3 0-6 2-8 5-2-3-5-5-8-5z" fill="none"/></svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-white font-semibold text-lg mb-2">Telegram Bot</h3>
+            <p class="text-slate-400 text-sm mb-4 leading-relaxed">Python yordamida yozilgan foydali Telegram bot -- buyruqlar va inline rejim.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Telegram API</span>
+              <span class="tech-tag">Bot</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="contact" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="gradient-line mb-16 max-w-xs"></div>
+      <span class="font-mono text-xs text-coral-400 tracking-widest uppercase mb-3 block reveal-section">04 / Aloqa</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4 reveal-section">Bog'lanaylik<span class="text-cyan-400">!</span></h2>
+      <p class="text-slate-400 mb-12 max-w-lg leading-relaxed reveal-section">Hamkorlik, savol yoki takliflaringiz bo'lsa -- bemalol murojaat qiling. Doimo aloqada bo'lishga tayyorman.</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- GitHub -->
+        <a href="https://github.com/shaxzodbek" target="_blank" rel="noopener noreferrer" class="glass rounded-2xl p-8 glass-hover transition-all duration-300 group flex flex-col items-center text-center reveal-section">
+          <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-5 group-hover:bg-cyan-400/10 transition-colors">
+            <svg width="28" height="28" fill="currentColor" class="text-white group-hover:text-cyan-400 transition-colors" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-1">GitHub</h3>
+          <p class="text-slate-500 text-sm">@shaxzodbek</p>
+        </a>
+
+        <!-- Telegram -->
+        <a href="https://t.me/nuraddinov_0001"as target="_blank" rel="noopener noreferrer" class="glass rounded-2xl p-8 glass-hover transition-all duration-300 group flex flex-col items-center text-center reveal-section">
+          <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-5 group-hover:bg-cyan-400/10 transition-colors">
+            <svg width="28" height="28" fill="currentColor" class="text-white group-hover:text-cyan-400 transition-colors" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-1">Telegram</h3>
+          <p class="text-slate-500 text-sm">@shaxzodbek</p>
+        </a>
+
+        <!-- Email -->
+        <a href="mailto:shaxzodbek@email.com" class="glass rounded-2xl p-8 glass-hover transition-all duration-300 group flex flex-col items-center text-center reveal-section sm:col-span-2 lg:col-span-1">
+          <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-5 group-hover:bg-coral-400/10 transition-colors">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" class="text-white group-hover:text-coral-400 transition-colors" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="text-white font-semibold mb-1">Email</h3>
+          <p class="text-slate-500 text-sm">shaxzodbek@email.com</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="py-10 px-6 border-t border-white/5">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-md bg-gradient-to-br from-cyan-400 to-coral-400 flex items-center justify-center text-navy-900 font-bold text-xs">S</div>
+        <span class="text-sm text-slate-500">Nuriddinov Shaxzodbek</span>
+      </div>
+      <p class="text-xs text-slate-600 font-mono">&copy; 2026 &mdash; Al-Xorazmiy loyihasi</p>
+    </div>
+  </footer>
+
+  <!-- ============ JAVASCRIPT ============ -->
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Navbar background on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.style.borderBottom = '1px solid rgba(34, 211, 238, 0.1)';
+      } else {
+        navbar.style.borderBottom = 'none';
+      }
+    });
+
+    // Intersection Observer for reveal animations
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal-section').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // Skill bar animation on scroll
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const bars = entry.target.querySelectorAll('.skill-fill');
+          bars.forEach((bar, i) => {
+            setTimeout(() => {
+              bar.style.width = bar.dataset.width + '%';
+            }, i * 120);
+          });
+          skillObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.skill-fill').forEach(bar => {
+      const parent = bar.closest('.space-y-6') || bar.parentElement;
+      skillObserver.observe(parent);
+    });
+
+    // Parallax effect on hero orbs
+    document.addEventListener('mousemove', (e) => {
+      const orbs = document.querySelectorAll('#hero .animate-float, #hero .animate-float-delayed');
+      const x = (e.clientX / window.innerWidth - 0.5) * 20;
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      orbs.forEach((orb, i) => {
+        const factor = i % 2 === 0 ? 1 : -1;
+        orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
+      });
+    });
+  </script>
+
+</body>
+</html>
